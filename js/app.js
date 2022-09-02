@@ -20,7 +20,7 @@ setFullMenu = async () => {
 }
 
 loadNewsData = async () => {
-    const response = await fetch('https://openapi.programming-hero.com/api/news/category/01');
+    const response = await fetch('https://openapi.programming-hero.com/api/news/category/04');
     const data = await response.json();
     return data;
 }
@@ -32,10 +32,10 @@ showNewsData = async () => {
         const createDiv = document.createElement('div');
         createDiv.innerHTML = `
             <div class="card lg:card-side bg-base-100 shadow-xl">
-                <figure><img class="" src="${data.image_url}" alt=""></figure>
+                <figure><img class="object-contain w-96" src="${data.image_url}" alt=""></figure>
                 <div class="card-body">
-                    <h2 class="card-title">New album is released!</h2>
-                    <p>Click the button to listen on Spotiwhy app.</p>
+                    <h2 class="card-title">${data.title}</h2>
+                    <p>${data._id}</p>
                     <div class="card-actions justify-end">
                         <button class="btn btn-primary">Listen</button>
                     </div>
