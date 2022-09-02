@@ -14,38 +14,41 @@ setFullMenu = async () => {
         if (menuArray.indexOf(section.category_name) === -1) {
             menuArray.push(section.category_name);
             const li = document.createElement('li');
-            li.innerHTML = `<button onclick="loadNewsData('${section.category_id}');toggleSpinner(${true})" id="">${section.category_name}</button>`;
+            li.innerHTML = `<button onclick="loadNewsData('${section.category_id}','${section.category_name}');toggleSpinner(${true})" id="">${section.category_name}</button>`;
             menu.appendChild(li);
         }
     }
 }
 
-const loadNewsData = id => {
+const loadNewsData = (id, elem) => {
+    console.log(id, elem)
     const url = `https://openapi.programming-hero.com/api/news/category/${id}`
     // console.log(url);
     // `https://openapi.programming-hero.com/api/news/category/${id}`
     fetch(url)
         .then(res => res.json())
-        .then(data => showNewsData(data.data))
+        .then(data => showNewsData(data.data, elem))
 }
 // Default Homepage
-loadNewsData("04")
+loadNewsData("04", "Sports")
 
-const showNewsData = newses => {
+const showNewsData = (newses, elem) => {
     // console.log(newses[0])
     const viewData = document.getElementById('showNews');
     viewData.innerHTML = ``;
     const totalNews = newses.length;
-    console.log(totalNews);
+    // console.log(totalNews);
+    countNews(totalNews, elem)
     const noNewsFound = document.getElementById('no-news-found');
     if (totalNews == 0) {
         noNewsFound.classList.remove('hidden');
+
     }
     else {
         noNewsFound.classList.add('hidden');
     }
     for (const news of newses) {
-        // console.log(news._id)
+        // console.log(news)
         const createDiv = document.createElement('div');
         createDiv.innerHTML = `
             <div class="card lg:card-side bg-base-100 shadow-xl my-10">
@@ -106,8 +109,14 @@ const toggleSpinner = isLoading => {
     }
 }
 
-const countNews = () => {
+const countNews = (id, elem) => {
     const showContainer = document.getElementById('countNews');
+    showContainer.innerHTML = ``;
+    const createDiv = document.createElement('div');
+    createDiv.innerHTML = `
+    <h3>${id} items found in Catagory <span class="font-bold">${elem}</span></h3>
+    `
+    showContainer.appendChild(createDiv)
 
 }
 
