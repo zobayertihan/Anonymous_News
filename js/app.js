@@ -31,22 +31,52 @@ showNewsData = async () => {
         const viewData = document.getElementById('showNews');
         const createDiv = document.createElement('div');
         createDiv.innerHTML = `
-            <div class="card lg:card-side bg-base-100 shadow-xl">
-                <figure><img class="object-contain w-96" src="${data.image_url}" alt=""></figure>
+            <div class="card lg:card-side bg-base-100 shadow-xl my-10">
+                <figure><img class="object-contain" src="${data.thumbnail_url}" alt=""></figure>
                 <div class="card-body">
                     <h2 class="card-title">${data.title}</h2>
-                    <p>${data._id}</p>
-                    <div class="card-actions justify-end">
-                        <button class="btn btn-primary">Listen</button>
+                    <p>${data.details.slice(0, 500)}...</p>
+                    <div class="card-actions justify-between">
+                        <div class="flex">
+                            <figure><img class="object-contain w-12 rounded-full" src="${data.author.img}" alt=""></figure>
+                            <div class="ml-2">
+                                <p>${data.author.name}</p>
+                                <p>${data.author.published_date}</p>
+                            </div>
+                        </div>
+                        <div class="ml-2">
+                                <p>Views: ${data.total_view}</p>
+                            </div>
+                        
+                        <label onclick="viewnewsDetails('${data._id}')" for="my-modal-3" class="btn modal-button">Details</label>
                     </div>
                 </div>
             </div>`
         viewData.appendChild(createDiv)
     }
+}
 
-
-
-
+viewnewsDetails = async (id) => {
+    // const url = `https://openapi.programming-hero.com/api/news/${id}`
+    // console.log(url);
+    const response = await fetch(`https://openapi.programming-hero.com/api/news/${id}`);
+    const datas = await response.json();
+    for (const data of datas.data) {
+        details = data.details;
+        author = data.author;
+        thumb = data.image_url;
+        // console.log(data.details);
+    }
+    const modalBody = document.getElementById('modal-body');
+    modalBody.innerHTML = ``;
+    modalBody.innerHTML = `
+    <h2>Author: ${author.name}</h2>
+    <img src="${author.img}">
+    <p>Published Date: ${author.published_date}</p>
+    <img src="${thumb}">
+    <p class="py-4">${details}</p>
+    `
+    console.log(datas);
 
 }
 showNewsData()
