@@ -5,62 +5,62 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News Portal</title>
+    <title>Anonymous News</title>
     <!-- DaisyUi and Tailwind -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@2.24.0/dist/full.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="p-5">
+<body class="p-5 ">
     <header>
         <section class="md:container md:mx-auto">
-            <div class="navbar bg-base-100">
+            <div class="navbar my-5 bg-base-100 shadow-xl">
                 <div class="flex-1">
-                    <p class="normal-case text-3xl">News Portal</p>
+                    <p class="normal-case text-3xl">Anonymous News</p>
                 </div>
                 <div class="flex-none">
                     <ul class="menu menu-horizontal p-0">
                         <li><a>News</a></li>
-                        <li><a>Blog</a></li>
+                        <li><a href="blog.html">Blog</a></li>
                     </ul>
                 </div>
             </div>
         </section>
         <hr>
         <section>
-            <ul id="allMenu" class="menu menu-horizontal p-0 flex justify-around">
+            <ul id="allMenu"
+                class="menu menu-horizontal p-0 md:flex justify-around grid grid-cols-3 g-2 my-5 bg-base-100 shadow-xl">
 
             </ul>
         </section>
     </header>
     <main>
         <section>
-            <div id="countNews" class="p-5 bg-base-100 text-2xl">
+            <div id="countNews" class="p-5 bg-base-100 text-2xl my-5 shadow-xl">
 
             </div>
         </section>
         <section>
-            <div class="navbar bg-base-100">
+            <div class="navbar my-5 bg-base-100 shadow-xl">
                 <div class="flex-1">
-                    <a class="btn btn-ghost normal-case text-xl">daisyUI</a>
-                </div>
-                <div class="flex-none">
-                    <ul class="menu menu-horizontal p-0">
-                        <li><a>Item 1</a></li>
+                    <h3>Sort By View:</h3>
+                    <!-- <a class="btn btn-ghost normal-case text-xl">daisyUI</a> -->
+                    <ul class="menu menu-horizontal p-0 bg-base-100">
                         <li tabindex="0">
                             <a>
-                                Parent
+                                Default:
                                 <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                     viewBox="0 0 24 24">
                                     <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
                                 </svg>
                             </a>
-                            <ul class="p-2 bg-base-100">
-                                <li><a>Submenu 1</a></li>
-                                <li><a>Submenu 2</a></li>
-                            </ul>
                         </li>
-                        <li><a>Item 3</a></li>
+                    </ul>
+                </div>
+                <div class="flex-none">
+                    <ul class="menu menu-horizontal p-0">
+                        <li><a>Today’s Pick</a></li>
+                        <li><a>Trending</a></li>
                     </ul>
                 </div>
             </div>
@@ -105,7 +105,8 @@
     </main>
     <script src="js/app.js"></script>
 </body>
-<footer class="p-10">
+
+<footer class="my-5 bg-base-100 shadow-xl">
     <p class="text-center p-10">Copyright 2022</p>
 </footer>
 

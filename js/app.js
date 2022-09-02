@@ -21,7 +21,7 @@ setFullMenu = async () => {
 }
 
 const loadNewsData = (id, elem) => {
-    console.log(id, elem)
+    // console.log(id, elem)
     const url = `https://openapi.programming-hero.com/api/news/category/${id}`
     // console.log(url);
     // `https://openapi.programming-hero.com/api/news/category/${id}`
@@ -48,6 +48,7 @@ const showNewsData = (newses, elem) => {
         noNewsFound.classList.add('hidden');
     }
     for (const news of newses) {
+
         // console.log(news)
         const createDiv = document.createElement('div');
         createDiv.innerHTML = `
@@ -56,7 +57,7 @@ const showNewsData = (newses, elem) => {
                 <div class="card-body">
                     <h2 class="card-title">${news.title}</h2>
                     <p>${news.details.slice(0, 500)}...</p>
-                    <div class="card-actions justify-between">
+                    <div class="card-actions md:flex justify-between grid grid-cols-1">
                         <div class="flex">
                             <figure><img class="object-contain w-12 rounded-full" src="${news.author.img}" alt=""></figure>
                             <div class="ml-2">
@@ -92,7 +93,7 @@ viewnewsDetails = async (id) => {
     const modalBody = document.getElementById('modal-body');
     modalBody.innerHTML = ``;
     modalBody.innerHTML = `
-    <h2>Author: ${author.name === "system" ? "No data Available" : author.name}</h2>
+    <h2>Author: ${author.name === null ? "No data Available" : author.name}</h2>
     <img src="${author.img}">
     <p>Published Date: ${author.published_date}</p>
     <img src="${thumb}">
@@ -114,10 +115,9 @@ const countNews = (id, elem) => {
     showContainer.innerHTML = ``;
     const createDiv = document.createElement('div');
     createDiv.innerHTML = `
-    <h3>${id} items found in Catagory <span class="font-bold">${elem}</span></h3>
+    <h3 class="text-center">${id} items found in Catagory <span class="font-bold">${elem}</span></h3>
     `
     showContainer.appendChild(createDiv)
-
 }
 
 
