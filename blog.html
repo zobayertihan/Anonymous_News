@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blogs</title>
+    <!-- DaisyUi and Tailwind -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.24.0/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="p-5">
+    <header class="text-center">
+        <h1>Questions and Answers</h1>
+    </header>
+    <main class="p-5">
+        <div class="card my-5 bg-base-100 shadow-xl ">
+            <div class="card-body">
+                <h2 class="card-title">Differences between var, let, and const.</h2>
+                <ul>
+                    <li>Var:</li>
+                    <ul class="list-disc">
+                        <li>The scope of a var variable is functional scope.</li>
+                        <li>It can be updated and re-declared into the scope.</li>
+                        <li>It can be declared without initialization.</li>
+                        <li>It can be accessed without initialization as its default value is “undefined”.</li>
+                    </ul>
+                    <li>Let:</li>
+                    <ul class="list-disc">
+                        <li>The scope of a let variable is block scope.</li>
+                        <li>It can be updated but cannot be re-declared into the scope.</li>
+                        <li>It can be declared without initialization.</li>
+                        <li>It cannot be accessed without initialization otherwise it will give ‘referenceError’.</li>
+                    </ul>
+                    <li>Const:</li>
+                    <ul class="list-disc">
+                        <li>The scope of a const variable is block scope.</li>
+                        <li>It cannot be updated or re-declared into the scope.</li>
+                        <li>It cannot be declared without initialization.</li>
+                        <li>It cannot be accessed without initialization, as it cannot be declared without
+                            initialization.</li>
+                    </ul>
+                </ul>
+            </div>
+        </div>
+        <div class="card my-5 bg-base-100 shadow-xl">
+            <div class="card-body">
+                <h2 class="card-title">Differences Between Arrow and Regular Functions</h2>
+                <ul>
+                    <li>Regular Function</li>
+                    <ul class="list-disc">
+                        <li>Inside of a regular JavaScript function, this value is dynamic.</li>
+                        <li>The regular function can easily construct objects and can be used as a constructor.</li>
+                        <li>Inside the body of a regular function, arguments is a special array-like object containing
+                            the list of arguments with which the function has been invoked.</li>
+                    </ul>
+                    <li>Arrow Function</li>
+                    <ul class="list-disc">
+                        <li>The behavior of this inside of an arrow function differs considerably from the regular
+                            function's this behavior. The arrow function doesn't define its own execution context.</li>
+                        <li>A consequence of this resolved lexically is that an arrow function cannot be used as a
+                            constructor.</li>
+                        <li>No arguments special keyword is defined inside an arrow function.</li>
+                    </ul>
+                </ul>
+            </div>
+        </div>
+        <div class="card my-5 bg-base-100 shadow-xl">
+            <div class="card-body">
+                <h2 class="card-title">Card title!</h2>
+                <p>If a dog chews shoes whose shoes does he choose?</p>
+            </div>
+        </div>
+        <div class="card my-5 bg-base-100 shadow-xl">
+            <div class="card-body">
+                <h2 class="card-title">Card title!</h2>
+                <p>If a dog chews shoes whose shoes does he choose?</p>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
