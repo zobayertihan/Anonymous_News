@@ -1,22 +1,32 @@
 const loadMenuData = async () => {
-    const response = await fetch('https://openapi.programming-hero.com/api/news/categories');
-    const data = await response.json();
-    return data;
+    try {
+        const response = await fetch('https://openapi.programming-hero.com/api/news/categories');
+        const data = await response.json();
+        return data;
+    }
+    catch (error) {
+        console.log(error);
+    }
 }
 
 setFullMenu = async () => {
-    const data = await loadMenuData();
-    // console.log(data)
-    const menu = document.getElementById('allMenu');
-    const menuArray = [];
+    try {
+        const data = await loadMenuData();
+        // console.log(data)
+        const menu = document.getElementById('allMenu');
+        const menuArray = [];
 
-    for (const section of data.data.news_category) {
-        if (menuArray.indexOf(section.category_name) === -1) {
-            menuArray.push(section.category_name);
-            const li = document.createElement('li');
-            li.innerHTML = `<button onclick="loadNewsData('${section.category_id}','${section.category_name}');toggleSpinner(${true})" id="">${section.category_name}</button>`;
-            menu.appendChild(li);
+        for (const section of data.data.news_category) {
+            if (menuArray.indexOf(section.category_name) === -1) {
+                menuArray.push(section.category_name);
+                const li = document.createElement('li');
+                li.innerHTML = `<button onclick="loadNewsData('${section.category_id}','${section.category_name}');toggleSpinner(${true})" id="">${section.category_name}</button>`;
+                menu.appendChild(li);
+            }
         }
+    }
+    catch (error) {
+        console.log(error);
     }
 }
 
@@ -27,13 +37,42 @@ const loadNewsData = (id, elem) => {
     // `https://openapi.programming-hero.com/api/news/category/${id}`
     fetch(url)
         .then(res => res.json())
-        .then(data => showNewsData(data.data, elem))
+        .then(data => shortNews(data.data, elem))
+        .catch(errror => console.log(errror))
 }
 // Default Homepage
 loadNewsData("04", "Sports")
 
+const shortNews = (newses, elem) => {
+    // console.log(newses)
+    // oldNewses = newses;
+    // oldNewses.short((a, b) => (b - a))
+    // console.log(oldNewses)
+    const array = [];
+    const newss = [];
+    for (const news of newses) {
+        // console.log(news)
+        // news.sort((a, b) => (b.total_view - a.total_view))
+        // console.log(news.total_view)
+        array.push(news.total_view);
+        newss.push(news);
+    }
+    // console.log(newses)
+    // console.log(array)
+    array.sort((a, b) => b - a);
+    // console.log(array);
+    newss.sort((a, b) => b.total_view - a.total_view)
+    // console.log(newss)
+    newses = newss
+    // console.log(newses)
+    showNewsData(newses, elem)
+
+}
+
 const showNewsData = (newses, elem) => {
     // console.log(newses[0])
+    // shortNews(newses);
+
     const viewData = document.getElementById('showNews');
     viewData.innerHTML = ``;
     const totalNews = newses.length;
@@ -82,23 +121,28 @@ const showNewsData = (newses, elem) => {
 viewnewsDetails = async (id) => {
     // const url = `https://openapi.programming-hero.com/api/news/${id}`
     // console.log(url);
-    const response = await fetch(`https://openapi.programming-hero.com/api/news/${id}`);
-    const datas = await response.json();
-    for (const data of datas.data) {
-        details = data.details;
-        author = data.author;
-        thumb = data.image_url;
-        // console.log(data.details);
-    }
-    const modalBody = document.getElementById('modal-body');
-    modalBody.innerHTML = ``;
-    modalBody.innerHTML = `
+    try {
+        const response = await fetch(`https://openapi.programming-hero.com/api/news/${id}`);
+        const datas = await response.json();
+        for (const data of datas.data) {
+            details = data.details;
+            author = data.author;
+            thumb = data.image_url;
+            // console.log(data.details);
+        }
+        const modalBody = document.getElementById('modal-body');
+        modalBody.innerHTML = ``;
+        modalBody.innerHTML = `
     <h2>Author: ${author.name === null ? "No data Available" : author.name}</h2>
     <img src="${author.img}">
     <p>Published Date: ${author.published_date}</p>
     <img src="${thumb}">
     <p class="py-4">${details}</p>
     `
+    }
+    catch (error) {
+        console.log(error);
+    }
 }
 const toggleSpinner = isLoading => {
     const loaderSection = document.getElementById('loader');
