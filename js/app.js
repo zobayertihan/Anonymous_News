@@ -12,7 +12,6 @@ const loadMenuData = async () => {
 setFullMenu = async () => {
     try {
         const data = await loadMenuData();
-        // console.log(data)
         const menu = document.getElementById('allMenu');
         const menuArray = [];
 
@@ -31,52 +30,33 @@ setFullMenu = async () => {
 }
 
 const loadNewsData = (id, elem) => {
-    // console.log(id, elem)
     const url = `https://openapi.programming-hero.com/api/news/category/${id}`
-    // console.log(url);
-    // `https://openapi.programming-hero.com/api/news/category/${id}`
     fetch(url)
         .then(res => res.json())
         .then(data => shortNews(data.data, elem))
         .catch(errror => console.log(errror))
 }
+
 // Default Homepage
 loadNewsData("04", "Sports")
 
 const shortNews = (newses, elem) => {
-    // console.log(newses)
-    // oldNewses = newses;
-    // oldNewses.short((a, b) => (b - a))
-    // console.log(oldNewses)
     const array = [];
     const newss = [];
     for (const news of newses) {
-        // console.log(news)
-        // news.sort((a, b) => (b.total_view - a.total_view))
-        // console.log(news.total_view)
         array.push(news.total_view);
         newss.push(news);
     }
-    // console.log(newses)
-    // console.log(array)
     array.sort((a, b) => b - a);
-    // console.log(array);
     newss.sort((a, b) => b.total_view - a.total_view)
-    // console.log(newss)
     newses = newss
-    // console.log(newses)
     showNewsData(newses, elem)
-
 }
 
 const showNewsData = (newses, elem) => {
-    // console.log(newses[0])
-    // shortNews(newses);
-
     const viewData = document.getElementById('showNews');
     viewData.innerHTML = ``;
     const totalNews = newses.length;
-    // console.log(totalNews);
     countNews(totalNews, elem)
     const noNewsFound = document.getElementById('no-news-found');
     if (totalNews == 0) {
@@ -87,8 +67,6 @@ const showNewsData = (newses, elem) => {
         noNewsFound.classList.add('hidden');
     }
     for (const news of newses) {
-
-        // console.log(news)
         const createDiv = document.createElement('div');
         createDiv.innerHTML = `
             <div class="card lg:card-side bg-base-100 shadow-xl my-10">
@@ -119,8 +97,6 @@ const showNewsData = (newses, elem) => {
 }
 
 viewnewsDetails = async (id) => {
-    // const url = `https://openapi.programming-hero.com/api/news/${id}`
-    // console.log(url);
     try {
         const response = await fetch(`https://openapi.programming-hero.com/api/news/${id}`);
         const datas = await response.json();
@@ -128,7 +104,6 @@ viewnewsDetails = async (id) => {
             details = data.details;
             author = data.author;
             thumb = data.image_url;
-            // console.log(data.details);
         }
         const modalBody = document.getElementById('modal-body');
         modalBody.innerHTML = ``;
@@ -164,7 +139,4 @@ const countNews = (id, elem) => {
     showContainer.appendChild(createDiv)
 }
 
-
-
-// showNewsData()
 setFullMenu()
